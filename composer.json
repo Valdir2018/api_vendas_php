@@ -1,0 +1,31 @@
+{
+	"name":"valdir2018/api_vendas_php",
+	"description":"criando uma api com php e javascript",
+	"minimum-stasbility":"stable",
+	"license":"MIT",
+	"authors": [
+		{
+			"name": "valdir",
+			"email": "valdirpiresba@gmail.com",
+			"role": "Developer"
+		}
+	],
+
+	"config": {
+		"vendor_dir": "vendor"
+	},
+
+	"autoload": {
+		"psr-4": {
+			"App\\": "app/"
+		},
+
+        "files": [
+			"Config.php"
+		]
+	},
+    "require" : {
+        "phpmailer/phpmailer": "^6.5"
+    }
+
+}
