@@ -7,20 +7,20 @@ use App\Models\Database\Connection;
 use \PDO;
 
 
-class Seller {
+class Seller 
+{
     private  $conn;
 
-    public function __construct() {
+    public function __construct() 
+    {
         $connect = new Connection;
         $this->conn = $connect->getConn();
     }
 
-    public function save(array $data) 
+    public function save(array $data) : array
     {
-        $query = $this->conn->prepare("INSERT INTO vendedores (nome, email) VALUES (:nome, :email) ");
-        $query->execute(
-            array(':nome' => $data['nome'], ':email' => $data['email'])
-        );
+        $query = $this->conn->prepare(" INSERT INTO vendedores (nome, email) VALUES (:nome, :email) ");
+        $query->execute( array(':nome' => $data['nome'], ':email' => $data['email']) );
 
         $lastInsertId = $this->conn->lastInsertId();
 
@@ -35,6 +35,19 @@ class Seller {
         }
 
         return $newArrayDataUser;
+    }
+
+    public function getAllSellers() 
+    {
+        $query = $this->conn->prepare(" SELECT * FROM vendedores ");
+        $query->execute();
+        $allResults = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        if (empty($allResults)) {
+            return [];
+        }
+
+        return $allResults;
     }
 
 }

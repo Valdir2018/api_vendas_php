@@ -36,7 +36,17 @@
      </header> 
 
 
+
      <div class="container">
+         <div class="submenu">
+             <ul>
+                <li><a href="">criar vendedor </a></li> 
+                <li><a href="vendedores.php?action=list" id="list_sellers">listar vendedores </a></li> 
+                <li><a href="">lançar uma venda </a></li> 
+                <li><a href="">listar vendas </a></li> 
+             </ul>
+         </div> 
+          
         <form action="" method="POST">
             <div class="form-title">
                 <h3><span> Cadastrar </span> vendedor</h3>

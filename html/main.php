@@ -2,10 +2,11 @@
 header('Content-Type: application/json');
 require "../vendor/autoload.php";
 
-try {
+try 
+{
    
 
-    if (isset($_REQUEST)) {
+    if (isset($_REQUEST['seller'])) {
         $data = json_decode($_POST['seller'], true);
         
         $class = '\App\Services\\'.ucfirst($data['classname']).'Services';        
@@ -15,12 +16,26 @@ try {
 
         if (class_exists($class) && method_exists($class, $method)) {
             $response = call_user_func_array( array( new $class, $method ), array($newSeller) );
-            $response_json = array('status' => 'success', 'message' => 'Vendedor cadastrado com sucesso', 'data' => $response);
             
-            echo json_encode( $response_json );
+            echo json_encode( $response );
     		exit;
         }
 
+    }
+    
+
+    if (isset($_REQUEST['getAllSeller'])) {
+        $data = json_decode($_POST['getAllSeller'], true);
+
+        $class = '\App\Services\\'.ucfirst($data['classname']).'Services';        
+        $method = (string) $data['method'];
+        
+        if (class_exists($class) && method_exists($class, $method)) {
+            $response = call_user_func( array( new $class, $method) );
+            
+            echo json_encode( $response );
+    		exit;
+        }
     }
 
 } catch(Exception $error) {

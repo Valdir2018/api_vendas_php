@@ -23,6 +23,12 @@ class SellerServices
 
         if (!empty($results)) {
             http_response_code(201);
+            $results = array(
+                'status' => 'success', 
+                'message' => 'Vendedor cadastrado com sucesso', 
+                'data' => $results
+            );
+
             return $results;
         }
 
@@ -31,15 +37,31 @@ class SellerServices
 
      }
 
+     public function getListAllSellers() 
+     {
+         $all = new Seller;
+         $results = $all->getAllSellers();
+         
+         if (!empty($results)) {
+             http_response_code(200);
+             return $results;
+         }
+         http_response_code(400);
+         $results = array(
+            'status' => 'error', 
+            'message' => 'Não foi possivel listar os dados', 
+            'data' => $results
+         );
+         
+         return $results;
+     }
+
      public function createNewSales() 
      {
 
      } 
 
-     public function getListAllSellers() 
-     {
-
-     }
+   
 
 }
 
