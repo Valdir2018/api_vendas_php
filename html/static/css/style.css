@@ -78,3 +78,31 @@ header > .navbar {
 
   width: 50%;
 }
+
+tr > td > a {
+  border-radius: 15px;
+  background-color: #98bf11;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+
+  padding: 0 0.75rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-appearance: none;
+}
+
+tr > td > a:hover,
+tr > td > a:focus {
+  text-decoration: none;
+}
+
+tr > td:nth-child(5n) {
+  display: flex;
+  justify-content: center;
+}

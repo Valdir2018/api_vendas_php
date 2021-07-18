@@ -14,6 +14,12 @@ class SellerServices
          }
 
          
+         if (!empty($_POST)) {
+            
+             var_dump($_POST);
+         }
+
+         
      }
 
      public function createNewSales() 
