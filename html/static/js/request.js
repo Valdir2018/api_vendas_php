@@ -9,16 +9,18 @@ function handleClickCreateSeller(e) {
     let nome = document.querySelector('[name="nome"]');
     let email = document.querySelector('[name="email"]');
     
-    let object = { data:{
-        "nome": nome.value,
-        "email": email.value
-      }
+    let object = {
+            'classname': 'seller', 
+            'method': 'createNewOnSeller',
+            'nome': nome.value,
+            'email': email.value,
+          
     };
 
-    const data = JSON.stringify(object);
+    const data = "seller=" + (JSON.stringify(object));
 
     const response = new XMLHttpRequest();
-    response.open('POST', '../App/Services/SellerServices.php', true);
+    response.open('POST', 'main.php', true);
     response.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     response.onreadystatechange = () => {

@@ -12,7 +12,7 @@
  <body>
 
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light ">
         <a class="navbar-brand" href="#">
             <img src="static/image/logo-header.svg" alt="">
         </a>

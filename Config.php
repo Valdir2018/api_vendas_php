@@ -3,7 +3,8 @@
 
 const DBDRIVER = 'mysql';
 const DBHOST = 'localhost';
-const DBNAME = '';
-const DBUSER = '';
+const DBNAME = 'databasecadastrovendas';
+const DBUSER = 'root';
 const DBPASS = '';
 
+?>

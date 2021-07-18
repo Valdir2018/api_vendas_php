@@ -3,7 +3,7 @@
 
 namespace App\Models\Database;
 
-require '../Config.php';
+require_once '../Config.php';
 
 class Connection {
     private $connection = null;
