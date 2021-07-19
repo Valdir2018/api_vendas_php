@@ -69,7 +69,7 @@ header > .navbar {
   border: 0;
   margin: 1.25rem 0;
   padding: 0.9rem 2.5rem;
-  border-radius: 0.75rem;
+  border-radius: 2rem;
 }
 
 .form-group > .form-control {
@@ -113,8 +113,6 @@ tr > td:nth-child(5n) {
   width: 100%;
 }
 
-/* td:not(:nth-child(2)):not(:nth-child(4))  */
-
 .submenu > ul > li {
   display: inline-flex;
   justify-content: space-around;
@@ -136,4 +134,46 @@ tr > td:nth-child(5n) {
   font-weight: 600;
 
   border-radius: 2rem;
+}
+
+.flexrow {
+  margin-top: 70px;
+
+  display: flex;
+}
+
+.flexrow > form > div {
+  padding: 0.5rem 0;
+}
+
+.flexrow > form > div > label {
+  width: 300px;
+  align-items: center;
+  display: flex;
+
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #585656;
+}
+
+.flexrow > form > div > input {
+  padding: 1.75rem 0.3rem;
+}
+
+.flexrow > form > div {
+  display: flex;
+  justify-content: space-around;
+}
+
+.flexrow > form > button {
+  width: 300px;
+  background: #4298c8;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  border: 0;
+  border-radius: 2rem;
+
+  float: right;
 }

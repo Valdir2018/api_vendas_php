@@ -4,13 +4,14 @@
 
 namespace App\Services;
 use App\Models\Seller;
-
+use App\Models\Sale;
 use Exception;
 
 
 class SellerServices 
-{
-     public function createNewOnSeller( array $dataset ) 
+{    const PERCENTUAL = 8.5;
+
+     public function createNewOnSeller( array $dataset ) : array
      {
         if (in_array('', $dataset)) {
             http_response_code(404);
@@ -19,7 +20,7 @@ class SellerServices
         }
 
         $newSeller = new Seller;
-        $results = $newSeller->save($dataset);
+        $results = $newSeller->addSeler($dataset);
 
         if (!empty($results)) {
             http_response_code(201);
@@ -28,16 +29,13 @@ class SellerServices
                 'message' => 'Vendedor cadastrado com sucesso', 
                 'data' => $results
             );
-
             return $results;
         }
-
         http_response_code(400);
         return $results;
-
      }
 
-     public function getListAllSellers() 
+     public function getListAllSellers() : array
      {
          $all = new Seller;
          $results = $all->getAllSellers();
@@ -56,10 +54,36 @@ class SellerServices
          return $results;
      }
 
-     public function createNewSales() 
+     public function createNewSales( array $dataset )
      {
+        if (in_array('', $dataset)) {
+            http_response_code(404);
+            throw new Exception('Não foi possivel concluir a venda');
+            die;
+        }
 
-     } 
+        $dataset['comissao'] = $this->getPercentualFromSale($dataset['valor_venda']);
+
+        $saveNewSale = new Sale;
+        $results = $saveNewSale->addSale($dataset);
+
+        if (!empty($results)) {
+            http_response_code(201);
+            $results = array(
+                'status' => 'success', 
+                'message' => 'Venda lançada com sucesso', 
+                'data' => $results
+            );
+            return $results;
+        }
+        http_response_code(400);
+        return $results;
+     }
+     
+     private function getPercentualFromSale($currentSaleTotal) : string
+     {   
+         return ($currentSaleTotal *  self::PERCENTUAL) / 100;
+     }
 
    
 

@@ -1,9 +1,3 @@
-<?php
-
-$id = 10;
-
-
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -43,23 +37,37 @@ $id = 10;
 
 
      <div class="container">
+     <div class="submenu">
+             <ul>
+                <li><a href="seler.php">criar vendedor </a></li> 
+                <li><a href="list-seler.php?action=list" id="list_sellers">listar vendedores </a></li> 
+                <li><a href="tothrow-sale.php?action=sale">lançar uma venda </a></li> 
+                <li><a href="list-sales.php?action=listsales">listar vendas </a></li> 
+             </ul>
+         </div> 
+
          <div class="form-title">
-            <h3><span> Listar </span>  Vendedores</h3>
+            <h3><span> Lançar </span>  Venda </h3>
          </div>
 
-         <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">E-mail</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="tbodydata">
-              
-            </tbody>
-          </table>
+
+         <div class="flexrow">
+             <form action="" method="POST">
+                <div >
+                    <label for="">Lançar uma venda</label>
+                    <select name="id" id="selectedseller" class="form-control">
+                       
+                    </select>
+                </div>
+
+                 <div >
+                   <label for="">Valor da Venda</label>
+                    <input type="text" name="value_sale" class="form-control" onchange="formatMoney(this)" placeholder="Informe o valor da venda">
+                 </div>
+                 
+                 <button type="submit" name="lancar-venda" id="newsale" >Lançar Venda</button>
+             </form>
+         </div>
      </div>
 
     

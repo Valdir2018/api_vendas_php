@@ -22,7 +22,7 @@ try
         }
 
     }
-    
+
 
     if (isset($_REQUEST['getAllSeller'])) {
         $data = json_decode($_POST['getAllSeller'], true);
@@ -32,6 +32,22 @@ try
         
         if (class_exists($class) && method_exists($class, $method)) {
             $response = call_user_func( array( new $class, $method) );
+            
+            echo json_encode( $response );
+    		exit;
+        }
+    }
+
+    if (isset($_REQUEST['new_sale'])) {
+        $data = json_decode($_POST['new_sale'], true);
+
+        $newSale = array( 'id' => $data['id'], 'valor_venda' => $data['valor_venda']);
+
+        $class = '\App\Services\\'.ucfirst($data['classname']).'Services';        
+        $method = (string) $data['method'];
+        
+        if (class_exists($class) && method_exists($class, $method)) {
+            $response = call_user_func( array( new $class, $method), $newSale);
             
             echo json_encode( $response );
     		exit;

@@ -9,7 +9,7 @@ use \PDO;
 
 class Seller 
 {
-    private  $conn;
+    private $conn;
 
     public function __construct() 
     {
@@ -17,7 +17,7 @@ class Seller
         $this->conn = $connect->getConn();
     }
 
-    public function save(array $data) : array
+    public function addSeler(array $data) : array
     {
         $query = $this->conn->prepare(" INSERT INTO vendedores (nome, email) VALUES (:nome, :email) ");
         $query->execute( array(':nome' => $data['nome'], ':email' => $data['email']) );
@@ -37,7 +37,7 @@ class Seller
         return $newArrayDataUser;
     }
 
-    public function getAllSellers() 
+    public function getAllSellers() : array
     {
         $query = $this->conn->prepare(" SELECT * FROM vendedores ");
         $query->execute();
