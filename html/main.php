@@ -4,7 +4,6 @@ require "../vendor/autoload.php";
 
 try 
 {
-   
 
     if (isset($_REQUEST['seller'])) {
         $data = json_decode($_POST['seller'], true);
@@ -22,7 +21,6 @@ try
         }
 
     }
-
 
     if (isset($_REQUEST['getAllSeller'])) {
         $data = json_decode($_POST['getAllSeller'], true);
@@ -54,7 +52,23 @@ try
         }
     }
 
+    if (isset($_REQUEST['getAllSales'])) {
+        $data = json_decode($_POST['getAllSales'], true);
+       
+        $class = '\App\Services\\'.ucfirst($data['classname']).'Services';        
+        $method = (string) $data['method'];
+        
+        if (class_exists($class) && method_exists($class, $method)) {
+            $response = call_user_func( array( new $class, $method) );
+            
+            echo json_encode( $response );
+    		exit;
+        }
+    }
+
 } catch(Exception $error) {
       
     echo json_encode( array('status' => 'error', 'data' => $error->getMessage(), JSON_UNESCAPED_UNICODE) );
 }
+
+

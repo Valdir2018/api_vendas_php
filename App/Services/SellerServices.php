@@ -85,6 +85,25 @@ class SellerServices
          return ($currentSaleTotal *  self::PERCENTUAL) / 100;
      }
 
+     public function getAllSales() : array
+     {
+        $fetchAllSales = new Sale;
+        $results = $fetchAllSales->getAllSales();
+
+        if (!empty($results)) {
+            http_response_code(200);
+            return $results;
+        }
+        http_response_code(400);
+        $results = array(
+           'status' => 'error', 
+           'message' => 'Não foi possivel listar os dados', 
+           'data' => $results
+        );
+        
+        return $results;
+     }
+
    
 
 }

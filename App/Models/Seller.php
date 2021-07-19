@@ -50,4 +50,16 @@ class Seller
         return $allResults;
     }
 
+
+    public function getSeleFromId($selerId) : array
+    {
+        $query = $this->conn->prepare(" SELECT nome, email 
+                                          FROM vendedores WHERE id = :currentid ");
+
+        $query->execute([':currentid' => $selerId]);
+
+        $allResults = $query->fetch(PDO::FETCH_ASSOC);
+        return $allResults;
+    }
+
 }

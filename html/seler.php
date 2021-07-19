@@ -36,14 +36,13 @@
      </header> 
 
 
-
      <div class="container">
          <div class="submenu">
              <ul>
                 <li><a href="seler.php">criar vendedor </a></li> 
                 <li><a href="list-seler.php?action=list" id="list_sellers">listar vendedores </a></li> 
                 <li><a href="tothrow-sale.php?action=sale">lançar uma venda </a></li> 
-                <li><a href="list-sales.php?action=listsales">listar vendas </a></li> 
+                <li><a href="list-sales.php?action=allsales">listar vendas </a></li> 
              </ul>
          </div> 
           
@@ -65,16 +64,10 @@
      </div>
 
     
-
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
-
     <script src="static/js/request.js"></script>
-    
-
-
 
 </body>
 </html>

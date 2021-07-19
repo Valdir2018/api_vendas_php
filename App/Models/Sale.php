@@ -4,6 +4,7 @@
 
 namespace App\Models;
 use App\Models\Database\Connection;
+use App\Models\Seller;
 use \PDO;
 
 
@@ -22,9 +23,8 @@ class Sale
         $query = $this->conn->prepare("
               INSERT INTO vendas (nome, email, comissao, valor_venda )
                      VALUES (:nome, :email, :comissao, :valorvenda) ");
-
-        
-        $data = $this->getSeleFromId($dataset['id']); 
+        $seler = new Seller;
+        $data = $seler->getSeleFromId($dataset['id']);
 
         $query->execute(
             array(
@@ -32,7 +32,6 @@ class Sale
                 ':email' => $data['email'], 
                 ':comissao' => $dataset['comissao'],
                 ':valorvenda' => $dataset['valor_venda']) );
-
         $lastInsertId = $this->conn->lastInsertId();
 
         $newSale = 
@@ -49,15 +48,16 @@ class Sale
         return $newSale;
     }
 
-
-    private function getSeleFromId($selerId) : array
+    public function getAllSales() : array
     {
-        $query = $this->conn->prepare(" SELECT nome, email 
-                                          FROM vendedores WHERE id = :currentid ");
+        $query = $this->conn->prepare(" SELECT * FROM vendas ORDER BY data_venda ASC ");
+        $query->execute();
+        $allResults = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        $query->execute([':currentid' => $selerId]);
+        if (empty($allResults)) {
+            return [];
+        }
 
-        $allResults = $query->fetch(PDO::FETCH_ASSOC);
         return $allResults;
     }
 

@@ -42,7 +42,7 @@
                 <li><a href="seler.php">criar vendedor </a></li> 
                 <li><a href="list-seler.php?action=list" id="list_sellers">listar vendedores </a></li> 
                 <li><a href="tothrow-sale.php?action=sale">lançar uma venda </a></li> 
-                <li><a href="list-sales.php?action=listsales">listar vendas </a></li> 
+                <li><a href="list-sales.php?action=allsales">listar vendas </a></li> 
              </ul>
          </div> 
 
