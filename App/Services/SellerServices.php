@@ -85,10 +85,10 @@ class SellerServices
          return ($currentSaleTotal *  self::PERCENTUAL) / 100;
      }
 
-     public function getAllSales() : array
+     public function getAllSalesFromSelerId(array $currentIdSelerFromSales ) : array
      {
         $fetchAllSales = new Sale;
-        $results = $fetchAllSales->getAllSales();
+        $results = $fetchAllSales->getSalesFromIdSeler($currentIdSelerFromSales);
 
         if (!empty($results)) {
             http_response_code(200);

@@ -1,10 +1,14 @@
 const createNewSeller = document.querySelector('#add');  
 const addNewSales = document.querySelector('#newsale');
 
+const currentIdSeler  = document.querySelector('.sales');
+
+
 window.addEventListener('load', function() {
   handleClickGetAllSellers();  
-  fetchAllSales();
   getAllSeller();
+
+  getFromNamesSelers();
 
 })
 
@@ -15,6 +19,13 @@ if ( createNewSeller !== null) {
 if ( addNewSales !== null) {
      addNewSales.addEventListener('click', handleClickAddNewSale )
 }
+
+
+if ( currentIdSeler !== null) {
+     currentIdSeler.addEventListener('change', fetchAllSales )
+}
+
+
 
 function handleClickCreateSeller(event) {
     event.preventDefault();
@@ -75,6 +86,13 @@ function renderSetSelect(elementHTML) {
     document.getElementById('selectedseller').innerHTML += output;
 }
 
+
+function renderFromAllNamesSelers(elementHTML) {
+    let output = `<option value="${elementHTML.id}">${elementHTML.nome}</option>`;
+    document.getElementById('data').innerHTML += output;
+}
+
+
 function handleClickGetAllSellers() {
     let params = new URLSearchParams(document.location.search.substring(1));
     let action = params.get('action');
@@ -125,6 +143,34 @@ function getAllSeller() {
     }
 }
 
+
+function getFromNamesSelers() {
+    let params = new URLSearchParams(document.location.search.substring(1));
+    let action = params.get('action');
+
+    if (action === 'allsales' ) {
+        let object = { 'classname': 'seller', 'method': 'getListAllSellers' };
+        let data = "getAllSeller=" + (JSON.stringify(object));
+        
+        let response = new XMLHttpRequest();
+        response.open('POST', 'main.php', true);
+        response.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        response.onreadystatechange = () => {
+            if (response.readyState === 4 && response.status === 200) {
+                let currentAllResults = JSON.parse(response.responseText);
+
+                currentAllResults.forEach(function(seller, index) {
+                   renderFromAllNamesSelers(seller);
+                });
+            }
+        }
+        response.send(data);
+    }
+}
+
+
+
 function handleClickAddNewSale(event) {
     event.preventDefault();
     let currentIdSeller = document.querySelector('[name="id"]');
@@ -150,13 +196,14 @@ function handleClickAddNewSale(event) {
     response.send(data);
 }
 
-function fetchAllSales() {
+function fetchAllSales(event) {
     let params = new URLSearchParams(document.location.search.substring(1));
     let action = params.get('action');
+    let currentId = event.target.value;
 
     if (action === 'allsales') {
-        let object = { 'classname': 'seller', 'method': 'getAllSales' };
-        let data = "getAllSales=" + (JSON.stringify(object));
+        let object = { 'classname': 'seller', 'method': 'getAllSalesFromSelerId', 'id': currentId };
+        let data = "getAllSalesFromSelerId=" + (JSON.stringify(object));
         let response = new XMLHttpRequest();
         response.open('POST', 'main.php', true);
         response.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -164,8 +211,10 @@ function fetchAllSales() {
         response.onreadystatechange = () => {
             if (response.readyState === 4 && response.status === 200) {
                 let currentAllResults = JSON.parse(response.responseText);
+                document.getElementById('tbodydatasales').innerHTML = '';
 
                 currentAllResults.forEach(function(seller, index) {
+                 
                    renderTableAllSales(seller);
                 });
             }

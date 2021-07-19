@@ -51,7 +51,7 @@ header > .navbar {
 
 .form-title > h3 {
   padding: 2rem 0;
-  margin-top: 3rem;
+  margin-top: 5rem;
 
   font-size: 2.7rem;
   font-weight: 300;
@@ -137,7 +137,7 @@ tr > td:nth-child(5n) {
 }
 
 .flexrow {
-  margin-top: 70px;
+  margin-top: 20px;
 
   display: flex;
 }

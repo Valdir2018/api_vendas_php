@@ -48,6 +48,11 @@
 
          <div class="form-title">
             <h3><span> Listar </span>  Vendas</h3>
+            
+            <select  id="data" class="form-control sales">
+               <option >SELECIONE UM VENDEDOR</option> 
+
+            </select>
          </div>
 
          <table class="table table-striped">

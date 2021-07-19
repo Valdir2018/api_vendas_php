@@ -52,14 +52,16 @@ try
         }
     }
 
-    if (isset($_REQUEST['getAllSales'])) {
-        $data = json_decode($_POST['getAllSales'], true);
+    if (isset($_REQUEST['getAllSalesFromSelerId'])) {
+        $data = json_decode($_POST['getAllSalesFromSelerId'], true);
+
+        $currentIdFromSales = array( 'id' => $data['id'] );
        
         $class = '\App\Services\\'.ucfirst($data['classname']).'Services';        
         $method = (string) $data['method'];
         
         if (class_exists($class) && method_exists($class, $method)) {
-            $response = call_user_func( array( new $class, $method) );
+            $response = call_user_func_array( array( new $class, $method), array($currentIdFromSales) );
             
             echo json_encode( $response );
     		exit;

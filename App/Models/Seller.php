@@ -53,7 +53,7 @@ class Seller
 
     public function getSeleFromId($selerId) : array
     {
-        $query = $this->conn->prepare(" SELECT nome, email 
+        $query = $this->conn->prepare(" SELECT id, email 
                                           FROM vendedores WHERE id = :currentid ");
 
         $query->execute([':currentid' => $selerId]);
