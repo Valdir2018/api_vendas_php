@@ -1,7 +1,8 @@
 <?php
 
-require "vendor/autoload.php";
+
+header("location: html/index.php");
 
 
-echo "Hello world !";
+
 

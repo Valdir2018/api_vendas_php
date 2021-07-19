@@ -2,6 +2,7 @@ const createNewSeller = document.querySelector('#add');
 const addNewSales = document.querySelector('#newsale');
 
 const currentIdSeler  = document.querySelector('.sales');
+const reportAllSales  = document.querySelector('#report');
 
 
 window.addEventListener('load', function() {
@@ -23,6 +24,11 @@ if ( addNewSales !== null) {
 
 if ( currentIdSeler !== null) {
      currentIdSeler.addEventListener('change', fetchAllSales )
+}
+
+
+if ( reportAllSales !== null) {
+     reportAllSales.addEventListener('click', handleClickGetFromAllSales )
 }
 
 
@@ -64,6 +70,7 @@ function renderTableAllSales(elementHTML) {
         <td>${formatCurrent(elementHTML.valor_venda)}</td>
         <td>${elementHTML.data_venda}</td>
     </tr>`;
+    
     document.getElementById('tbodydatasales').innerHTML += output;
 }
 
@@ -74,9 +81,6 @@ function rendeTableHTML(elementHTML) {
         <td>${elementHTML.nome}</td>
         <td>${elementHTML.email}</td>
         <td></td>
-        <td>
-            <a href="index.php?action=tothrow&id=${elementHTML.id}">Nova Venda</a>
-        </td>
     </tr>`;
     document.getElementById('tbodydata').innerHTML += output;
 }
@@ -212,9 +216,10 @@ function fetchAllSales(event) {
             if (response.readyState === 4 && response.status === 200) {
                 let currentAllResults = JSON.parse(response.responseText);
                 document.getElementById('tbodydatasales').innerHTML = '';
+              
 
                 currentAllResults.forEach(function(seller, index) {
-                 
+                   document.querySelector('.reportid').value = seller.id;
                    renderTableAllSales(seller);
                 });
             }
@@ -224,6 +229,25 @@ function fetchAllSales(event) {
 
 }
 
+function handleClickGetFromAllSales(event) {
+    event.preventDefault();
+    let currentId = event.target.value;
+
+    let object = { 'classname': 'seller', 'method': 'getAllSalesFromSelerId',  'id': currentId };
+    let data = "sendmail=" + (JSON.stringify(object));
+   
+    let response = new XMLHttpRequest();
+    response.open('POST', 'main.php', true);
+    response.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    response.onreadystatechange = () => {
+        if (response.readyState === 4 && response.status === 200) {
+            toatMessage('E-mail enviado com sucesso');
+        }
+    }
+    response.send(data);
+}
+
 const formatCurrent = (value) => {
     let currentFormat =   new Intl.NumberFormat('pr-BR', {
         style: 'currency',
@@ -231,3 +255,15 @@ const formatCurrent = (value) => {
         maximumSignificantDigits: 2}).format(value);
     return currentFormat + ',00';    
 }
+
+
+
+function toatMessage(value) {
+    var element = document.getElementById("add_message");
+    element.innerHTML = value;
+    element.className = "show";
+     setTimeout(function() {
+        element.className = element.className.replace("show", ""); 
+    }, 900);
+ }
+ 

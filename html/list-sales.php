@@ -1,3 +1,13 @@
+<?php
+
+require '../vendor/autoload.php';
+
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -39,7 +49,7 @@
      <div class="container">
      <div class="submenu">
              <ul>
-                <li><a href="seler.php">criar vendedor </a></li> 
+                <li><a href="index.php">criar vendedor </a></li> 
                 <li><a href="list-seler.php?action=list" id="list_sellers">listar vendedores </a></li> 
                 <li><a href="tothrow-sale.php?action=sale">lançar uma venda </a></li> 
                 <li><a href="list-sales.php?action=allsales">listar vendas </a></li> 
@@ -64,14 +74,28 @@
                     <th scope="col">Comissão</th>
                     <th scope="col">Valor Venda</th>
                     <th scope="col">Data Venda</th>
-                    <th></th>
+                  
                 </tr>
             </thead>
             <tbody id="tbodydatasales">
               
             </tbody>
           </table>
+
+          <div class="flex-report">
+             <form action="POST">
+                <button type="submit" class="reportid" name="report" id="report">Enviar Relatório</button>
+             </form>
+            <div  id="add_message" style=" display:flex; margin: 15px 74px"></div>
+          </div>
+     
      </div>
+
+
+       
+    
+
+      
 
     
 

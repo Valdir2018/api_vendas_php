@@ -177,3 +177,107 @@ tr > td:nth-child(5n) {
 
   float: right;
 }
+
+.flex-report {
+  display: flex;
+}
+
+.flex-report > form > button {
+  width: 300px;
+  background: #4298c8;
+  color: #fff;
+  font-weight: 600;
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  border: 0;
+  border-radius: 0.25rem;
+  cursor: pointer;
+
+  float: right;
+}
+
+#message_sucess {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #4caf50;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 80%;
+  bottom: 30px;
+  font-size: 15px;
+}
+#message_sucess.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+#add_message {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #4caf50;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 70%;
+  bottom: 30px;
+  font-size: 17px;
+}
+#add_message.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}

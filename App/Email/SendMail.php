@@ -2,16 +2,11 @@
 
 
 namespace App\Email;
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 use App\Email\Classes\Config;
-
-//Load Composer's autoloader
-require "../../vendor/autoload.php";
-// require_once 'classes/Config.php';
 
 class SendMail extends PHPMailer {
    

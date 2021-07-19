@@ -3,10 +3,11 @@
 
 
 namespace App\Services;
+use App\Email\EmailCustom;
+
 use App\Models\Seller;
 use App\Models\Sale;
 use Exception;
-
 
 class SellerServices 
 {    const PERCENTUAL = 8.5;
@@ -89,6 +90,11 @@ class SellerServices
      {
         $fetchAllSales = new Sale;
         $results = $fetchAllSales->getSalesFromIdSeler($currentIdSelerFromSales);
+
+
+        if (isset( $currentIdSelerFromSales['sendmail'] )) {
+            EmailCustom::contentMail($results);
+        }
 
         if (!empty($results)) {
             http_response_code(200);
