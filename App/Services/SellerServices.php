@@ -23,7 +23,7 @@ class SellerServices
         $newSeller = new Seller;
         $results = $newSeller->addSeler($dataset);
 
-        if (!empty($results)) {
+        if (!empty($results) && $results['status'] !== 'error') {
             http_response_code(201);
             $results = array(
                 'status' => 'success', 

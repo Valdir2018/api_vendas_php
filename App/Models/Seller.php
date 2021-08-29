@@ -10,6 +10,7 @@ use \PDO;
 class Seller 
 {
     private $conn;
+    private $newArrayDataUser;
 
     public function __construct() 
     {
@@ -19,22 +20,34 @@ class Seller
 
     public function addSeler(array $data) : array
     {
-        $query = $this->conn->prepare(" INSERT INTO vendedores (nome, email) VALUES (:nome, :email) ");
-        $query->execute( array(':nome' => $data['nome'], ':email' => $data['email']) );
+        $result = $this->getFromSeller($data['email']);
+        
+        if (!$result) {
+             $query = $this->conn->prepare(" INSERT INTO vendedores (nome, email) VALUES (:nome, :email) ");
+             $query->execute( array(':nome' => $data['nome'], ':email' => $data['email']) );
 
-        $lastInsertId = $this->conn->lastInsertId();
+            $lastInsertId = $this->conn->lastInsertId();
 
-        $newArrayDataUser = array(
-            'id' => $lastInsertId,
-            'nome' => $data['nome'],
-            'email' => $data['email']
-        );
+            $this->newArrayDataUser = [
+                'status' => 'OK', 
+                'id' => $lastInsertId,
+                'nome' => $data['nome'],
+                'email' => $data['email']
+            ];
 
-        if (empty($lastInsertId)) {
-            return [];
+            if (empty($lastInsertId)) {
+                return [];
+            }
+        } else {
+
+            return  $this->newArrayDataUser = [
+                'status' => 'error',
+                'error' => 'vendedor ja esta cadastrado',
+                'code'=> 400
+            ];
         }
 
-        return $newArrayDataUser;
+        return $this->newArrayDataUser;
     }
 
     public function getAllSellers() : array
@@ -53,6 +66,7 @@ class Seller
 
     public function getSeleFromId($selerId) : array
     {
+
         $query = $this->conn->prepare(" SELECT id, email 
                                           FROM vendedores WHERE id = :currentid ");
 
@@ -60,6 +74,15 @@ class Seller
 
         $allResults = $query->fetch(PDO::FETCH_ASSOC);
         return $allResults;
+    }
+
+    private function getFromSeller(string $email) 
+    {
+        $query = $this->conn->prepare(" SELECT email FROM vendedores WHERE email = :email ");
+        $query->execute( [':email' => $email ] );
+        $result = $query->rowCount();
+
+        return ($result >= 1 ) ? true : false;
     }
 
 }

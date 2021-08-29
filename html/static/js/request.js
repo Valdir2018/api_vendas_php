@@ -256,8 +256,6 @@ const formatCurrent = (value) => {
     return currentFormat + ',00';    
 }
 
-
-
 function toatMessage(value) {
     var element = document.getElementById("add_message");
     element.innerHTML = value;
