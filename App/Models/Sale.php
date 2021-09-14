@@ -67,4 +67,15 @@ class Sale
         return $allResults;
     }
 
+
+    public function deleteOnSale( $sale ) 
+    {
+
+        $query = $this->conn->prepare(" DELETE  FROM vendedores WHERE id = {$sale} ");
+        $query->execute();
+      
+        $count = $query->rowCount();
+        return $count;
+    }
+
 }

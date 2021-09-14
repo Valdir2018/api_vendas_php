@@ -3,6 +3,7 @@ const addNewSales = document.querySelector('#newsale');
 
 const currentIdSeler  = document.querySelector('.sales');
 const reportAllSales  = document.querySelector('#report');
+const deleteOneSale = document.querySelector('#del');
 
 
 window.addEventListener('load', function() {
@@ -29,6 +30,11 @@ if ( currentIdSeler !== null) {
 
 if ( reportAllSales !== null) {
      reportAllSales.addEventListener('click', handleClickGetFromAllSales )
+}
+
+
+if ( deleteOneSale !== null) {
+     deleteOneSale.addEventListener('click', deleteFromSale );
 }
 
 
@@ -66,10 +72,7 @@ function handleClickCreateSeller(event) {
         document.getElementById('data').innerText = message;
         
     }
-    
-
     // console.log(response.code)
-
     response.send(data);
 }
 
@@ -94,7 +97,7 @@ function rendeTableHTML(elementHTML) {
         <td>${elementHTML.nome}</td>
         <td>${elementHTML.email}</td>
         <td>
-           <a href="list-seler.php?action=list&id=${elementHTML.id}">Excluir</a>
+           <a class="del" href="list-seler.php?action=list&id=${elementHTML.id}">Excluir</a>
         </td>
     </tr>`;
     document.getElementById('tbodydata').innerHTML += output;
@@ -266,8 +269,6 @@ function handleClickGetFromAllSales(event) {
 }
 
 
-
-
 function deleteFromSale() {
     const params = new URLSearchParams(document.location.search.substring(1));
     const saleId  = params.get('id');
@@ -285,7 +286,7 @@ function deleteFromSale() {
 
     response.onreadystatechange = () => {
         if (response.readyState === 4 && response.status === 200) {
-            toatMessage('E-mail enviado com sucesso');
+            // toatMessage('E-mail enviado com sucesso');
         }
     }
     response.send(data);
@@ -293,7 +294,6 @@ function deleteFromSale() {
 }
 
 deleteFromSale();
-
 
 const formatCurrent = (value) => {
     let currentFormat =   new Intl.NumberFormat('pr-BR', {

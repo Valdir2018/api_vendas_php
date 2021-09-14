@@ -93,7 +93,7 @@ try
         $method = (string) $data['method'];
         
         if (class_exists($class) && method_exists($class, $method)) {
-            $response = call_user_func_array( array( new $class, $method), array($currentIdFromSales) );
+            $response = call_user_func_array( array( new $class, $method), array($sale) );
             
             echo json_encode( $response );
     		exit;

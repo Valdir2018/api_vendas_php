@@ -111,9 +111,29 @@ class SellerServices
      }
 
 
-     public function deleteSale(array $currentId) {}
+     public function deleteFromSale(array $dataset) 
+     {
+        unset($dataset['deleteSale']);
 
-   
+        $id = (int) $dataset['id'];
 
+        if (in_array('', $dataset)) {
+            http_response_code(404);
+            throw new Exception('Não foi possivel excluir o vendedor');
+            die;
+        }
+
+        $delete = new Sale;
+        $results = $delete->deleteOnSale($id);
+
+        if ($results > 0) {
+            http_response_code(200);
+
+            $results = array(
+                'status' => 'sucesso', 
+                'message' => 'Vendedor Excluido com sucesso', 
+            );
+        }
+     }
 }
 
