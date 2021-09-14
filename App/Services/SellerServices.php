@@ -110,6 +110,9 @@ class SellerServices
         return $results;
      }
 
+
+     public function deleteSale(array $currentId) {}
+
    
 
 }

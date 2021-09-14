@@ -84,6 +84,23 @@ try
         }
     }
 
+    if (isset($_REQUEST['deleteSale'])) {
+        $data = json_decode($_POST['deleteSale'], true);
+
+        $sale =  array( 'deleteSale' => true, 'id' => $data['id'] );
+
+        $class = '\App\Services\\'.ucfirst($data['classname']).'Services';        
+        $method = (string) $data['method'];
+        
+        if (class_exists($class) && method_exists($class, $method)) {
+            $response = call_user_func_array( array( new $class, $method), array($currentIdFromSales) );
+            
+            echo json_encode( $response );
+    		exit;
+        }
+
+    }
+
 } catch(Exception $error) {
       
     echo json_encode( array('status' => 'error', 'data' => $error->getMessage(), JSON_UNESCAPED_UNICODE) );

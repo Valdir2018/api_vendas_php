@@ -47,15 +47,28 @@ function handleClickCreateSeller(event) {
 
     let data = "seller=" + (JSON.stringify(object));
 
+    var message = '';
+
+
     const response = new XMLHttpRequest();
     response.open('POST', 'main.php', true);
     response.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    response.onreadystatechange = () => {
+    response.onreadystatechange = function(){
         if (response.readyState === 4 && response.status === 200) {
             console.log(response);
+        } 
+
+        if (response.status === 400) {
+            console.log('Vendedor já esta cadastrado ! Error => ' + this.status);
+            message = 'Oops ! Vendedor já está cadastrado.';
         }
+        document.getElementById('data').innerText = message;
+        
     }
+    
+
+    // console.log(response.code)
 
     response.send(data);
 }
@@ -80,7 +93,9 @@ function rendeTableHTML(elementHTML) {
         <th scope="row"> ${elementHTML.id} </th>
         <td>${elementHTML.nome}</td>
         <td>${elementHTML.email}</td>
-        <td></td>
+        <td>
+           <a href="list-seler.php?action=list&id=${elementHTML.id}">Excluir</a>
+        </td>
     </tr>`;
     document.getElementById('tbodydata').innerHTML += output;
 }
@@ -195,7 +210,9 @@ function handleClickAddNewSale(event) {
     response.onreadystatechange = () => {
         if (response.readyState === 4 && response.status === 200) {
             console.log(response);
+            
         }
+      
     }
     response.send(data);
 }
@@ -247,6 +264,36 @@ function handleClickGetFromAllSales(event) {
     }
     response.send(data);
 }
+
+
+
+
+function deleteFromSale() {
+    const params = new URLSearchParams(document.location.search.substring(1));
+    const saleId  = params.get('id');
+
+    if (saleId == '') {
+        throw new Error('Não é possível excluir esse vendedor.');
+    }
+
+    let object = { 'classname': 'seller', 'method': 'deleteFromSale',  'id': saleId };
+    let data = "deleteSale=" + (JSON.stringify(object));
+
+    const response = new XMLHttpRequest();
+    response.open('POST', 'main.php', true);
+    response.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    response.onreadystatechange = () => {
+        if (response.readyState === 4 && response.status === 200) {
+            toatMessage('E-mail enviado com sucesso');
+        }
+    }
+    response.send(data);
+
+}
+
+deleteFromSale();
+
 
 const formatCurrent = (value) => {
     let currentFormat =   new Intl.NumberFormat('pr-BR', {

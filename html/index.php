@@ -15,6 +15,11 @@
             </div>
             <button type="submit" id="add" class="btn btn-primary customer-button">CADASTRAR</button>
         </form>
+
+
+        <div id="message-error">
+
+        </div>
      </div>
 
     

@@ -182,6 +182,18 @@ tr > td:nth-child(5n) {
   display: flex;
 }
 
+#message-error {
+  background: #c70044;
+  /* padding: 12px; */
+  border-radius: 0.4rem;
+  color: white;
+  font-weight: 500;
+  width: 350px;
+  float: right;
+  margin-bottom: 46px;
+  display: flex;
+}
+
 .flex-report > form > button {
   width: 300px;
   background: #4298c8;
